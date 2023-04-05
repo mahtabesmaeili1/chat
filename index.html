@@ -1,20 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width ,initial-scale = 1.0 " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>Music wave on website</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
   </head>
   <body>
     <div class="hero">
       <div class="music">
-        <p>Artist: Lana Del rey</p>
+        <p>Artist: Lana Del Rey</p>
         <h1>Religion</h1>
         <div class="track">
-          <img src="media/play.jpeg" />
-          <div></div>
+          <img src="media/play.jpeg" id="playBtn" />
         </div>
       </div>
     </div>
+    <script>
+      var playBtn = document.getElementById("playBtn");
+      var sound = new Howl({
+        src: ["media/Religion.mp3"],
+        onplay: function () {
+          console.log("sound started playing");
+          playBtn.src = "media/pause.jpeg";
+        },
+        onpause: function () {
+          console.log("sound paused");
+          playBtn.src = "media/play.jpeg";
+        },
+        onend: function () {
+          console.log("sound ended");
+          playBtn.src = "media/play.jpeg";
+        },
+        onstop: function () {
+          console.log("sound stopped");
+          playBtn.src = "media/play.jpeg";
+        },
+      });
+      playBtn.onclick = function () {
+        console.log("playBtn clicked");
+        if (sound.playing()) {
+          sound.pause();
+        } else {
+          sound.play();
+        }
+      };
+    </script>
   </body>
 </html>
